@@ -1,29 +1,26 @@
 .b-cart {
-    min-width: 300px;
-    max-width: 800px;
-    margin: 0 auto;
-    border: solid 1px red;
+  min-width: 300px;
+  max-width: 800px;
+  margin: 0 auto;
 
-    &__list {
-        position: relative;
-    }
+  &__list {
+    position: relative;
+  }
 
-    &__product {
-        font-size: 16px;
-        margin: 0 30px 15px 0;
-        border: solid 1px red;
-    }
+  &__product {
+    font-size: 16px;
+    margin: 0 30px 15px 0;
+  }
 
-    &__price {
-        position: absolute;
-        right: 50%;
-        font-size: 16px;
-        margin-bottom: 15px;
-        border: solid 1px red;
-    }
+  &__price {
+    position: absolute;
+    right: 50%;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
 
-    &__total {
-        margin-bottom: 15px;
-        font-size: 20px;
-    }
+  &__total {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
 }

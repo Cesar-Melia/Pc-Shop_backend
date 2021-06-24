@@ -6,8 +6,6 @@ const {
   createPost,
   editPut,
   editGet,
-  addCommentPut,
-  deleteCommentPut,
   deleteGet,
   deleteProduct,
   productIdGet,
