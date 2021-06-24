@@ -1,5 +1,6 @@
 const indexGet = (req, res) => {
-    return res.status(200).render("index", { user: req.user, isAdmin: req.isAdmin });
+  const message = 'PC Shop API';
+  return res.status(200).json(message);
 };
 
 module.exports = { indexGet };

@@ -1,13 +1,5 @@
 const passport = require('passport');
 
-const registerGet = (req, res, next) => {
-  return res.render('register', { user: req.user, isAdmin: req.isAdmin });
-};
-
-const loginGet = (req, res, next) => {
-  return res.render('login', { user: req.user, isAdmin: req.isAdmin });
-};
-
 const registerPost = (req, res, next) => {
   const done = (error, user) => {
     if (error) return next(error);
@@ -43,4 +35,4 @@ const logoutPost = (req, res, next) => {
   }
 };
 
-module.exports = { registerGet, loginGet, registerPost, loginPost, logoutPost };
+module.exports = { registerPost, loginPost, logoutPost };

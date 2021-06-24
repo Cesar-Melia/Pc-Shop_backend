@@ -1,14 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
-const path = require('path'); //
-const hbs = require('hbs'); //
+const path = require('path');
+// const hbs = require('hbs');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 require('./authentication/passport');
 const indexRoutes = require('./routes/index.routes');
-const adminRoutes = require('./routes/admin.routes');
 const productsRoutes = require('./routes/products.routes');
 const authRoutes = require('./routes/auth.routes');
 const usersRoutes = require('./routes/users.routes');
@@ -40,26 +39,25 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('views', path.join(__dirname, 'views')); //
-app.set('view engine', 'hbs'); //
+// app.set('views', path.join(__dirname, 'views')); //
+// app.set('view engine', 'hbs'); //
 
-app.use((req, res, next) => {
-  req.isAdmin = false;
+// app.use((req, res, next) => {
+//   req.isAdmin = false;
 
-  if (!req.isAuthenticated()) {
-    return next();
-  }
+//   if (!req.isAuthenticated()) {
+//     return next();
+//   }
 
-  if (req.user && req.user.role === 'admin') {
-    req.isAdmin = true;
-  }
-  return next();
-});
+//   if (req.user && req.user.role === 'admin') {
+//     req.isAdmin = true;
+//   }
+//   return next();
+// });
 
 app.use('/', indexRoutes);
-app.use('/admin', adminRoutes);
 app.use('/products', productsRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
@@ -71,18 +69,11 @@ app.use('*', (req, res) => {
   const error = new Error('Ruta no encontradas');
   error.status = 404;
 
-  return res.status(404).render('error', error);
+  return res.status(404).json(error);
 });
 
-app.use((error, req, res, next) => {
-  console.log(error);
-
-  return res.status(error.status || 500).render('error', {
-    message: error.message,
-    status: error.status || 500,
-    user: req.user,
-    isAdmin: req.isAdmin,
-  });
+app.use((error, req, res) => {
+  return res.status(error.status || 500).json(error);
 });
 
 app.listen(PORT, () => {

@@ -21,7 +21,7 @@ const cartUserGet = async (req, res, next) => {
       existingCart.user.password = null;
     }
 
-    return res.render('cesta', { user: req.user, isAdmin: req.isAdmin, cart: existingCart });
+    return res.json(existingCart);
   } catch (error) {
     next(error);
   }
@@ -102,8 +102,7 @@ const addToCartPost = async (req, res, next) => {
       console.log(editedProduct);
     }
   }
-  console.log(existingCart);
-  return res.redirect('/products/shop');
+  return res.json(existingCart);
 };
 
 const createPost = async (req, res, next) => {

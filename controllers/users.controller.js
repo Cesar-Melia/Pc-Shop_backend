@@ -2,13 +2,9 @@ const User = require('../models/User.model');
 
 const usersGet = async (req, res, next) => {
   try {
-    let isAdmin;
-    if (req.user && req.user.role === 'admin') {
-      isAdmin = true;
-    }
-
     const users = await User.find().populate('orders');
-    return res.status(200).render('users', { user: req.user, users, isAdmin });
+
+    return res.status(200).json(users);
   } catch (error) {
     return next(error);
   }
@@ -61,7 +57,7 @@ const userIdGet = async (req, res, next) => {
     const { id } = req.params;
     const userDetail = await User.findById(id);
 
-    return res.status(200).render('user', { user: req.user, userDetail, isAdmin: req.isAdmin });
+    return res.status(200).json(userDetail);
   } catch (error) {
     return next(error);
   }

@@ -1,35 +1,13 @@
 const Product = require('../models/Product.model');
-const User = require('../models/User.model');
-const Comment = require('../models/Comment.model');
 
 const productsGet = async (req, res, next) => {
   try {
     const products = await Product.find();
-    return res.status(200).render('products', { user: req.user, products, isAdmin: req.isAdmin });
+
+    return res.status(200).json(products);
   } catch (error) {
     return next(error);
   }
-};
-
-const shopGet = async (req, res, next) => {
-  try {
-    const products = await Product.find();
-
-    let user;
-    req.user ? (user = req.user._id) : (user = 'guest');
-
-    return res.status(200).render('shop', {
-      user,
-      products,
-      isAdmin: req.isAdmin,
-    });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-const createGet = (req, res, next) => {
-  return res.render('create-product', { user: req.user, isAdmin: req.isAdmin });
 };
 
 const createPost = async (req, res, next) => {
@@ -60,10 +38,6 @@ const createPost = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-};
-
-const editGet = (req, res, next) => {
-  return res.render('edit-product', { user: req.user, isAdmin: req.isAdmin });
 };
 
 const editPut = async (req, res, next) => {
@@ -110,10 +84,6 @@ const editPut = async (req, res, next) => {
   }
 };
 
-const deleteGet = (req, res, next) => {
-  return res.render('delete-product', { user: req.user, isAdmin: req.isAdmin });
-};
-
 const deleteProduct = async (req, res, next) => {
   try {
     const { _id } = req.params;
@@ -137,8 +107,6 @@ const productIdGet = async (req, res, next) => {
 
     console.log('Entra en products/id');
 
-    // return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
-
     return res.status(200).json(product);
   } catch (error) {
     return next(error);
@@ -147,12 +115,8 @@ const productIdGet = async (req, res, next) => {
 
 module.exports = {
   productsGet,
-  shopGet,
-  createGet,
   createPost,
   editPut,
-  editGet,
-  deleteGet,
   deleteProduct,
   productIdGet,
 };

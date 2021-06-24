@@ -6,7 +6,7 @@ const ordersGet = async (req, res, next) => {
   try {
     const orders = await Order.find().populate('users').populate('products');
 
-    return res.status(200).render('orders', { user: req.user, orders, isAdmin: req.isAdmin });
+    return res.status(200).json(orders);
   } catch (error) {
     return next(error);
   }
@@ -112,7 +112,7 @@ const orderIdGet = async (req, res, next) => {
     const { id } = req.params;
     const order = await Order.findById(id).populate('users').populate('products.product');
 
-    return res.status(200).render('order', { user: req.user, order, isAdmin: req.isAdmin });
+    return res.status(200).json(order);
   } catch (error) {
     return next(error);
   }
