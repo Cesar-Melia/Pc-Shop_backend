@@ -1,23 +1,23 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const DB_URL = process.env.DB_URL; //"mongodb://localhost:27017/pc-shop";
+const DB_URL = process.env.DB_URL; //"mongodb://localhost:27017/pc-hunt";
 
 const connect = async () => {
-    try {
-        const db = await mongoose.connect(DB_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+  try {
+    const db = await mongoose.connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-        const { name, host } = db.connection;
-        console.log(`Conectado correctamente a la db ${name} en ${host}`);
-    } catch (eror) {
-        console.log("Ha ocurrido un error conectando a la base de datos. ", error);
-    }
+    const { name, host } = db.connection;
+    console.log(`Conectado correctamente a la db ${name} en ${host}`);
+  } catch (eror) {
+    console.log('Ha ocurrido un error conectando a la base de datos. ', error);
+  }
 };
 
 module.exports = {
-    DB_URL,
-    connect,
+  DB_URL,
+  connect,
 };
