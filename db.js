@@ -12,7 +12,7 @@ const connect = async () => {
 
     const { name, host } = db.connection;
     console.log(`Conectado correctamente a la db ${name} en ${host}`);
-  } catch (eror) {
+  } catch (error) {
     console.log('Ha ocurrido un error conectando a la base de datos. ', error);
   }
 };
